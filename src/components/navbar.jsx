@@ -28,6 +28,7 @@ import {
 } from "@/components/atom/dropdown-menu";
 import { LoginForm } from "./login-form";
 import { RegisterForm } from "./register-form";
+import CartSidebar from "@/components/cart-sidebar";
 
 export default function Navbar() {
   const [showSearch, setShowSearch] = useState(false);
@@ -328,17 +329,22 @@ export default function Navbar() {
             </DropdownMenu>
 
             {/* Cart */}
-            <Link href="/cart">
-              <Button variant="ghost" size="icon" className="relative">
-                <ShoppingBag className="h-5 w-5" />
-                {cartItemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {cartItemCount}
-                  </span>
-                )}
-                <span className="sr-only">Cart</span>
-              </Button>
-            </Link>
+            <Sheet>
+              <SheetTrigger>
+                <Button variant="ghost" size="icon" className="relative">
+                  <ShoppingBag className="h-5 w-5" />
+                  {cartItemCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {cartItemCount}
+                    </span>
+                  )}
+                  <span className="sr-only">Cart</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent className="p-0">
+                <CartSidebar />
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
