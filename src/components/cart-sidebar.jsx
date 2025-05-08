@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Minus, Plus, ShoppingCart, X } from "lucide-react";
 import Image from "next/image";
 
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/atom/button";
+import { ScrollArea } from "@/components/atom/scroll-area";
+import { Separator } from "@/components/atom/separator";
 
 // Sample cart data - in a real app, this would come from your state management
 const initialCartItems = [
