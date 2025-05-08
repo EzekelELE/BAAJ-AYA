@@ -26,9 +26,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/atom/dropdown-menu";
+import { LoginForm } from "./login-form";
+import { RegisterForm } from "./register-form";
 
 export default function Navbar() {
   const [showSearch, setShowSearch] = useState(false);
+  const [userLoggedIn, setUserLoggedIn] = useState(true);
   const cartItemCount = 3; // This would come from your cart state
 
   const categories = [
@@ -248,6 +251,7 @@ export default function Navbar() {
             </Link>
 
             {/* Account */}
+
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
@@ -255,19 +259,71 @@ export default function Navbar() {
                   <span className="sr-only">Account</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem asChild>
-                  <Link href="/login">Sign In</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/register">Create Account</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/account">My Account</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/orders">Orders</Link>
-                </DropdownMenuItem>
+              <DropdownMenuContent
+                align="end"
+                className={"flex flex-col items-start p-2 gap-1"}
+              >
+                {!userLoggedIn ? (
+                  <>
+                    <DropdownMenuItem asChild>
+                      <Sheet>
+                        <SheetTrigger asChild>
+                          <Button variant="ghost">Sign In</Button>
+                        </SheetTrigger>
+                        <SheetContent>
+                          <LoginForm />
+                        </SheetContent>
+                      </Sheet>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Sheet>
+                        <SheetTrigger asChild>
+                          <Button variant="ghost">Register</Button>
+                        </SheetTrigger>
+                        <SheetContent>
+                          <RegisterForm />
+                        </SheetContent>
+                      </Sheet>
+                    </DropdownMenuItem>
+                  </>
+                ) : (
+                  <>
+                    <DropdownMenuItem asChild>
+                      <Sheet>
+                        <SheetTrigger asChild>
+                          <Button variant="ghost">Contul meu</Button>
+                        </SheetTrigger>
+                        <SheetContent>
+                          <LoginForm />
+                        </SheetContent>
+                      </Sheet>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Sheet>
+                        <SheetTrigger asChild>
+                          <Link href={"./register"}>
+                            <Button variant="ghost">Comenzile mele</Button>
+                          </Link>
+                        </SheetTrigger>
+                        <SheetContent>
+                          <LoginForm />
+                        </SheetContent>
+                      </Sheet>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Sheet>
+                        <SheetTrigger asChild>
+                          <Link href={""}>
+                            <Button variant="ghost">Deconecteaza-te</Button>
+                          </Link>
+                        </SheetTrigger>
+                        <SheetContent>
+                          <LoginForm />
+                        </SheetContent>
+                      </Sheet>
+                    </DropdownMenuItem>
+                  </>
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
 
