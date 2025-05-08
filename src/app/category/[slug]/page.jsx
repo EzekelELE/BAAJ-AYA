@@ -1,18 +1,32 @@
-import { Suspense } from "react"
-import { Filter, ChevronDown, Grid3X3, LayoutGrid } from "lucide-react"
+import { Suspense } from "react";
+import { Filter, ChevronDown, Grid3X3, LayoutGrid } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import ProductGrid from "./product-grid"
-import CategoryFilters from "./category-filters"
-import CategoryLoading from "./loading"
+import { Button } from "@/components/atom/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/atom/select";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/atom/sheet";
+import ProductGrid from "./product-grid";
+import CategoryFilters from "./category-filters";
+import CategoryLoading from "./loading";
 
 // This would typically come from a database or API
 const categories = {
   "mens-clothing": {
     name: "Men's Clothing",
-    description: "Shop our collection of men's clothing, from casual essentials to formal wear.",
+    description:
+      "Shop our collection of men's clothing, from casual essentials to formal wear.",
     productCount: 30,
     filters: {
       sizes: ["XS", "S", "M", "L", "XL", "XXL"],
@@ -22,7 +36,8 @@ const categories = {
   },
   "womens-clothing": {
     name: "Women's Clothing",
-    description: "Discover our latest women's clothing collection for every occasion.",
+    description:
+      "Discover our latest women's clothing collection for every occasion.",
     productCount: 30,
     filters: {
       sizes: ["XS", "S", "M", "L", "XL"],
@@ -32,21 +47,22 @@ const categories = {
   },
   accessories: {
     name: "Accessories",
-    description: "Complete your look with our range of accessories for every style.",
+    description:
+      "Complete your look with our range of accessories for every style.",
     productCount: 30,
     filters: {
       colors: ["Black", "White", "Gray", "Brown", "Gold", "Silver"],
       priceRange: { min: 9.99, max: 149.99 },
     },
   },
-}
+};
 
 export default function CategoryPage({ params }) {
   const category = categories[params.slug] || {
     name: "Products",
     description: "Browse our collection of products.",
     productCount: 30,
-  }
+  };
 
   return (
     <Suspense fallback={<CategoryLoading />}>
@@ -86,7 +102,9 @@ export default function CategoryPage({ params }) {
                   <SheetContent side="left" className="w-[300px] sm:w-[400px]">
                     <SheetHeader>
                       <SheetTitle>Filters</SheetTitle>
-                      <SheetDescription>Narrow down your product search with our filters.</SheetDescription>
+                      <SheetDescription>
+                        Narrow down your product search with our filters.
+                      </SheetDescription>
                     </SheetHeader>
                     <div className="py-4">
                       <CategoryFilters category={category} />
@@ -100,7 +118,8 @@ export default function CategoryPage({ params }) {
 
                 <p className="text-sm text-gray-500">
                   Showing <span className="font-medium">1-30</span> of{" "}
-                  <span className="font-medium">{category.productCount}</span> products
+                  <span className="font-medium">{category.productCount}</span>{" "}
+                  products
                 </p>
               </div>
 
@@ -121,8 +140,12 @@ export default function CategoryPage({ params }) {
                   <SelectContent>
                     <SelectItem value="featured">Featured</SelectItem>
                     <SelectItem value="newest">Newest</SelectItem>
-                    <SelectItem value="price-asc">Price: Low to High</SelectItem>
-                    <SelectItem value="price-desc">Price: High to Low</SelectItem>
+                    <SelectItem value="price-asc">
+                      Price: Low to High
+                    </SelectItem>
+                    <SelectItem value="price-desc">
+                      Price: High to Low
+                    </SelectItem>
                     <SelectItem value="rating">Top Rated</SelectItem>
                   </SelectContent>
                 </Select>
@@ -131,14 +154,26 @@ export default function CategoryPage({ params }) {
 
             {/* Active Filters */}
             <div className="flex flex-wrap gap-2 mb-6">
-              <Button variant="secondary" size="sm" className="h-7 rounded-full">
+              <Button
+                variant="secondary"
+                size="sm"
+                className="h-7 rounded-full"
+              >
                 Under $50
                 <span className="ml-1 text-xs">×</span>
               </Button>
-              <Button variant="secondary" size="sm" className="h-7 rounded-full">
+              <Button
+                variant="secondary"
+                size="sm"
+                className="h-7 rounded-full"
+              >
                 Size: M<span className="ml-1 text-xs">×</span>
               </Button>
-              <Button variant="secondary" size="sm" className="h-7 rounded-full">
+              <Button
+                variant="secondary"
+                size="sm"
+                className="h-7 rounded-full"
+              >
                 Color: Black
                 <span className="ml-1 text-xs">×</span>
               </Button>

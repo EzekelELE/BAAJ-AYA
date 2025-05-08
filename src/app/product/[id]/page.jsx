@@ -1,13 +1,18 @@
-import { Suspense } from "react"
-import { Star, Truck, ShoppingCart, Heart, Share2 } from "lucide-react"
+import { Suspense } from "react";
+import { Star, Truck, ShoppingCart, Heart, Share2 } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import ProductImageGallery from "./product-image-gallery"
-import ProductReviews from "./product-reviews"
-import RelatedProducts from "./related-products"
-import ProductLoading from "./loading"
+import { Button } from "@/components/atom/button";
+import { Separator } from "@/components/atom/separator";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/atom/tabs";
+import ProductImageGallery from "./product-image-gallery";
+import ProductReviews from "./product-reviews";
+import RelatedProducts from "./related-products";
+import ProductLoading from "./loading";
 
 // This would typically come from a database or API
 const product = {
@@ -38,7 +43,7 @@ const product = {
   sku: "HC-1001-BLK",
   shipping: "Free shipping on orders over $50",
   delivery: "2-4 business days",
-}
+};
 
 export default function ProductPage({ params }) {
   return (
@@ -59,14 +64,21 @@ export default function ProductPage({ params }) {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-4 h-4 ${i < Math.floor(product.rating) ? "fill-yellow-400 text-yellow-400" : "fill-gray-200 text-gray-200"}`} />
+                      className={`w-4 h-4 ${
+                        i < Math.floor(product.rating)
+                          ? "fill-yellow-400 text-yellow-400"
+                          : "fill-gray-200 text-gray-200"
+                      }`}
+                    />
                   ))}
                 </div>
                 <span className="text-sm text-gray-600">
                   {product.rating} ({product.reviewCount} reviews)
                 </span>
               </div>
-              <p className="text-2xl font-bold mb-4">${product.price.toFixed(2)}</p>
+              <p className="text-2xl font-bold mb-4">
+                ${product.price.toFixed(2)}
+              </p>
               <p className="text-gray-600 mb-6">{product.description}</p>
             </div>
 
@@ -79,9 +91,12 @@ export default function ProductPage({ params }) {
                 {product.colors.map((color, index) => (
                   <button
                     key={color}
-                    className={`w-10 h-10 rounded-full border-2 ${index === 0 ? "border-black" : "border-transparent"}`}
+                    className={`w-10 h-10 rounded-full border-2 ${
+                      index === 0 ? "border-black" : "border-transparent"
+                    }`}
                     style={{ backgroundColor: color.toLowerCase() }}
-                    aria-label={color} />
+                    aria-label={color}
+                  />
                 ))}
               </div>
             </div>
@@ -90,13 +105,20 @@ export default function ProductPage({ params }) {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="font-medium">Size</h3>
-                <button className="text-sm text-gray-600 underline">Size Guide</button>
+                <button className="text-sm text-gray-600 underline">
+                  Size Guide
+                </button>
               </div>
               <div className="grid grid-cols-6 gap-2">
                 {product.sizes.map((size, index) => (
                   <button
                     key={size}
-                    className={`py-2 border rounded-md ${index === 2 ? "border-black bg-black text-white" : "border-gray-300 hover:border-gray-400"}`}>
+                    className={`py-2 border rounded-md ${
+                      index === 2
+                        ? "border-black bg-black text-white"
+                        : "border-gray-300 hover:border-gray-400"
+                    }`}
+                  >
                     {size}
                   </button>
                 ))}
@@ -108,11 +130,17 @@ export default function ProductPage({ params }) {
               <div className="flex items-center">
                 <span className="mr-4">Quantity:</span>
                 <div className="flex border border-gray-300 rounded-md">
-                  <button className="px-3 py-1 border-r border-gray-300">-</button>
+                  <button className="px-3 py-1 border-r border-gray-300">
+                    -
+                  </button>
                   <span className="px-4 py-1">1</span>
-                  <button className="px-3 py-1 border-l border-gray-300">+</button>
+                  <button className="px-3 py-1 border-l border-gray-300">
+                    +
+                  </button>
                 </div>
-                <span className="ml-4 text-sm text-gray-600">{product.stock} available</span>
+                <span className="ml-4 text-sm text-gray-600">
+                  {product.stock} available
+                </span>
               </div>
 
               <div className="flex gap-2">
@@ -135,7 +163,9 @@ export default function ProductPage({ params }) {
                 <Truck className="w-5 h-5 mt-0.5 text-gray-600" />
                 <div>
                   <p className="font-medium">{product.shipping}</p>
-                  <p className="text-sm text-gray-600">Estimated delivery: {product.delivery}</p>
+                  <p className="text-sm text-gray-600">
+                    Estimated delivery: {product.delivery}
+                  </p>
                 </div>
               </div>
             </div>

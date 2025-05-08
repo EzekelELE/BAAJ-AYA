@@ -1,9 +1,9 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Star, ShoppingCart, Heart } from "lucide-react"
+import Image from "next/image";
+import Link from "next/link";
+import { Star, ShoppingCart, Heart } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/atom/button";
+import { Badge } from "@/components/atom/badge";
 
 // This would typically come from a database or API based on the category
 const generateProducts = (slug, count = 30) => {
@@ -53,19 +53,21 @@ const generateProducts = (slug, count = 30) => {
       ],
       priceRange: { min: 19.99, max: 149.99 },
     },
-  }
+  };
 
-  const category = categories[slug] || categories["mens-clothing"]
-  const products = []
+  const category = categories[slug] || categories["mens-clothing"];
+  const products = [];
 
   for (let i = 1; i <= count; i++) {
-    const nameIndex = (i - 1) % category.names.length
-    const price = category.priceRange.min + Math.random() * (category.priceRange.max - category.priceRange.min)
-    const rating = 3 + Math.random() * 2
-    const reviewCount = Math.floor(Math.random() * 200) + 5
-    const isNew = Math.random() > 0.8
-    const isSale = !isNew && Math.random() > 0.8
-    const salePercentage = isSale ? Math.floor(Math.random() * 30) + 10 : 0
+    const nameIndex = (i - 1) % category.names.length;
+    const price =
+      category.priceRange.min +
+      Math.random() * (category.priceRange.max - category.priceRange.min);
+    const rating = 3 + Math.random() * 2;
+    const reviewCount = Math.floor(Math.random() * 200) + 5;
+    const isNew = Math.random() > 0.8;
+    const isSale = !isNew && Math.random() > 0.8;
+    const salePercentage = isSale ? Math.floor(Math.random() * 30) + 10 : 0;
 
     products.push({
       id: `${slug}-${i}`,
@@ -78,27 +80,27 @@ const generateProducts = (slug, count = 30) => {
       isNew: isNew,
       isSale: isSale,
       salePercentage: salePercentage,
-    })
+    });
   }
 
-  return products
-}
+  return products;
+};
 
 export default function ProductGrid({ slug }) {
-  const products = generateProducts(slug)
+  const products = generateProducts(slug);
 
   return (
-    <div
-      className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
       {products.map((product) => (
         <div key={product.id} className="group relative">
           {/* Product Badge */}
           {product.isNew && (
-            <Badge className="absolute top-2 left-2 z-10 bg-black text-white hover:bg-black">New</Badge>
+            <Badge className="absolute top-2 left-2 z-10 bg-black text-white hover:bg-black">
+              New
+            </Badge>
           )}
           {product.isSale && (
-            <Badge
-              className="absolute top-2 left-2 z-10 bg-red-500 text-white hover:bg-red-500">
+            <Badge className="absolute top-2 left-2 z-10 bg-red-500 text-white hover:bg-red-500">
               {product.salePercentage}% Off
             </Badge>
           )}
@@ -107,24 +109,24 @@ export default function ProductGrid({ slug }) {
           <Button
             variant="ghost"
             size="icon"
-            className="absolute top-2 right-2 z-10 h-8 w-8 rounded-full bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity">
+            className="absolute top-2 right-2 z-10 h-8 w-8 rounded-full bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
             <Heart className="h-4 w-4" />
           </Button>
 
           {/* Product Image */}
-          <div
-            className="relative aspect-square mb-3 overflow-hidden rounded-lg bg-gray-100">
+          <div className="relative aspect-square mb-3 overflow-hidden rounded-lg bg-gray-100">
             <Link href={`/product/${product.id}`}>
               <Image
                 src={product.image || "/placeholder.svg"}
                 alt={product.name}
                 fill
-                className="object-cover transition-transform group-hover:scale-105" />
+                className="object-cover transition-transform group-hover:scale-105"
+              />
             </Link>
 
             {/* Quick Add Button */}
-            <div
-              className="absolute inset-x-0 bottom-0 flex-col items-center p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute inset-x-0 bottom-0 flex-col items-center p-2 opacity-0 group-hover:opacity-100 transition-opacity">
               <Button className="w-full gap-2 bg-white text-black hover:bg-white/90">
                 <ShoppingCart className="h-4 w-4" />
                 Quick Add
@@ -135,7 +137,9 @@ export default function ProductGrid({ slug }) {
           {/* Product Info */}
           <div>
             <Link href={`/product/${product.id}`} className="block">
-              <h3 className="font-medium text-gray-900 group-hover:underline">{product.name}</h3>
+              <h3 className="font-medium text-gray-900 group-hover:underline">
+                {product.name}
+              </h3>
             </Link>
             <div className="flex items-center gap-1 mt-1">
               <div className="flex">
@@ -143,16 +147,23 @@ export default function ProductGrid({ slug }) {
                   <Star
                     key={i}
                     className={`w-3 h-3 ${
-                      i < Math.floor(product.rating) ? "fill-yellow-400 text-yellow-400" : "fill-gray-200 text-gray-200"
-                    }`} />
+                      i < Math.floor(product.rating)
+                        ? "fill-yellow-400 text-yellow-400"
+                        : "fill-gray-200 text-gray-200"
+                    }`}
+                  />
                 ))}
               </div>
-              <span className="text-xs text-gray-500">({product.reviewCount})</span>
+              <span className="text-xs text-gray-500">
+                ({product.reviewCount})
+              </span>
             </div>
             <div className="mt-1 flex items-center gap-2">
               <span className="font-medium">${product.price.toFixed(2)}</span>
               {product.originalPrice && (
-                <span className="text-sm text-gray-500 line-through">${product.originalPrice.toFixed(2)}</span>
+                <span className="text-sm text-gray-500 line-through">
+                  ${product.originalPrice.toFixed(2)}
+                </span>
               )}
             </div>
           </div>
