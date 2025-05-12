@@ -36,6 +36,7 @@ export default function Navbar() {
   const cartItemCount = 3; // This would come from your cart state
 
   const categories = [
+    { name: "Home", href: "/category/home", subcategories: [] },
     {
       name: "Women",
       href: "/category/womens-clothing",
@@ -46,9 +47,6 @@ export default function Navbar() {
       href: "/category/mens-clothing",
       subcategories: ["Clothing", "Shoes", "Accessories", "New Arrivals"],
     },
-    { name: "Kids", href: "/category/kids", subcategories: [] },
-    { name: "Home", href: "/category/home", subcategories: [] },
-    { name: "Sale", href: "/sale", subcategories: [] },
   ];
 
   return (
@@ -61,7 +59,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Mobile Menu */}
-          <Sheet>
+          <Sheet defaultOpen>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-6 w-6" />
@@ -264,7 +262,7 @@ export default function Navbar() {
                 align="end"
                 className={"flex flex-col items-start p-2 gap-1"}
               >
-                {!userLoggedIn ? (
+                {true ? (
                   <>
                     <DropdownMenuItem asChild>
                       <Sheet>
@@ -290,38 +288,10 @@ export default function Navbar() {
                 ) : (
                   <>
                     <DropdownMenuItem asChild>
-                      <Sheet>
-                        <SheetTrigger asChild>
-                          <Button variant="ghost">Contul meu</Button>
-                        </SheetTrigger>
-                        <SheetContent>
-                          <LoginForm />
-                        </SheetContent>
-                      </Sheet>
+                      <Link href={"./userProfile"}>My orders</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Sheet>
-                        <SheetTrigger asChild>
-                          <Link href={"./register"}>
-                            <Button variant="ghost">Comenzile mele</Button>
-                          </Link>
-                        </SheetTrigger>
-                        <SheetContent>
-                          <LoginForm />
-                        </SheetContent>
-                      </Sheet>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Sheet>
-                        <SheetTrigger asChild>
-                          <Link href={""}>
-                            <Button variant="ghost">Deconecteaza-te</Button>
-                          </Link>
-                        </SheetTrigger>
-                        <SheetContent>
-                          <LoginForm />
-                        </SheetContent>
-                      </Sheet>
+                      <Link href={"./userProfile"}>Log out</Link>
                     </DropdownMenuItem>
                   </>
                 )}
