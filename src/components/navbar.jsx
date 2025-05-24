@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import * as React from "react";
 import Link from "next/link";
 import {
   Menu,
@@ -11,7 +12,7 @@ import {
   ChevronDown,
   X,
 } from "lucide-react";
-
+import { useUserStore } from "@/store/useUserStore";
 import { Button } from "@/components/atom/button";
 import { Input } from "@/components/atom/input";
 import {
@@ -31,6 +32,11 @@ import { RegisterForm } from "./register-form";
 import CartSidebar from "@/components/cart-sidebar";
 
 export default function Navbar() {
+  React.useEffect(() => {
+    console.log("");
+  }, []);
+  const { user, isAuthenticated, updateProfile } = useUserStore();
+
   const [showSearch, setShowSearch] = useState(false);
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const cartItemCount = 3; // This would come from your cart state
@@ -59,7 +65,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Mobile Menu */}
-          <Sheet defaultOpen>
+          <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-6 w-6" />
@@ -262,7 +268,7 @@ export default function Navbar() {
                 align="end"
                 className={"flex flex-col items-start p-2 gap-1"}
               >
-                {true ? (
+                {!isAuthenticated ? (
                   <>
                     <DropdownMenuItem asChild>
                       <Sheet>
