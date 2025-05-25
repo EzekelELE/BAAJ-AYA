@@ -42,7 +42,7 @@ export default function Navbar() {
   const cartItemCount = 3; // This would come from your cart state
 
   const categories = [
-    { name: "Home", href: "/category/home", subcategories: [] },
+    { name: "Home", href: "/", subcategories: [] },
     {
       name: "Women",
       href: "/category/womens-clothing",
