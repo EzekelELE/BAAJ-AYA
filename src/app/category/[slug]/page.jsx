@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 import { Filter, ChevronDown, Grid3X3, LayoutGrid } from "lucide-react";
-
+import { productCategories } from "../../constants/index";
 import { Button } from "@/components/atom/button";
+import Custom404 from "@/app/custom404/page";
 import {
   Select,
   SelectContent,
@@ -57,13 +58,20 @@ const categories = {
   },
 };
 
-export default function CategoryPage({ params }) {
+export default async function CategoryPage({ params }) {
   const category = categories[params.slug] || {
     name: "Products",
     description: "Browse our collection of products.",
     productCount: 30,
   };
 
+  const getAllValidCategories = productCategories.map((item) =>
+    item.name.toLocaleLowerCase().replace(" ", "-")
+  );
+
+  if (!getAllValidCategories.includes(params.slug)) {
+    return <Custom404 />;
+  }
   return (
     <Suspense fallback={<CategoryLoading />}>
       <main className="container mx-auto px-4 py-8">

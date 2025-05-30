@@ -15,6 +15,7 @@ import {
 import { useUserStore } from "@/store/useUserStore";
 import { Button } from "@/components/atom/button";
 import { Input } from "@/components/atom/input";
+import { productCategories } from "@/app/constants";
 import {
   Sheet,
   SheetContent,
@@ -32,28 +33,11 @@ import { RegisterForm } from "./register-form";
 import CartSidebar from "@/components/cart-sidebar";
 
 export default function Navbar() {
-  React.useEffect(() => {
-    console.log("");
-  }, []);
   const { user, isAuthenticated, updateProfile } = useUserStore();
 
   const [showSearch, setShowSearch] = useState(false);
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const cartItemCount = 3; // This would come from your cart state
-
-  const categories = [
-    { name: "Home", href: "/", subcategories: [] },
-    {
-      name: "Women",
-      href: "/category/womens-clothing",
-      subcategories: ["Clothing", "Shoes", "Accessories", "New Arrivals"],
-    },
-    {
-      name: "Men",
-      href: "/category/mens-clothing",
-      subcategories: ["Clothing", "Shoes", "Accessories", "New Arrivals"],
-    },
-  ];
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b">
@@ -103,7 +87,7 @@ export default function Navbar() {
                 </div>
                 <nav className="flex-1 overflow-auto py-4">
                   <ul className="space-y-4">
-                    {categories.map((category) => (
+                    {productCategories.map((category) => (
                       <li key={category.name} className="px-2">
                         {category.subcategories.length > 0 ? (
                           <div className="space-y-2">
@@ -170,7 +154,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {categories.map((category) => (
+            {productCategories.map((category) => (
               <div key={category.name} className="relative group">
                 {category.subcategories.length > 0 ? (
                   <DropdownMenu>
