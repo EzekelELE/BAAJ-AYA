@@ -1,5 +1,5 @@
 export const productCategories = [
-  { name: "Home", href: "/", subcategories: [] },
+  { name: "Acasa", href: "/", subcategories: [] },
   {
     name: "Baloane",
     href: "/category/baloane",
@@ -16,7 +16,7 @@ export const productCategories = [
     subcategories: [],
   },
   {
-    name: "Acesori masa",
+    name: "Acesorii masa",
     href: "/category/acesori-masa",
     subcategories: [],
   },

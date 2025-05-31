@@ -43,8 +43,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full bg-white border-b">
       {/* Announcement Bar */}
       <div className="bg-black text-white text-center text-sm py-2">
-        Free shipping on orders over $50 | Use code WELCOME10 for 10% off your
-        first order
+        Transport gratuit pentru comenzile de peste 200 lei
       </div>
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
@@ -149,7 +148,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="text-xl font-bold">STYLISH</span>
+            <span className="text-xl font-bold">Lumiere Events</span>
           </Link>
 
           {/* Desktop Navigation */}
