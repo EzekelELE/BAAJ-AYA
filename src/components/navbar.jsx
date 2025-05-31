@@ -149,7 +149,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="text-xl font-bold">STYLISH</span>
+            <span className="text-xl font-bold">Lumier Events</span>
           </Link>
 
           {/* Desktop Navigation */}
