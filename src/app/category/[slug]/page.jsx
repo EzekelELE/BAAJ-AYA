@@ -59,7 +59,9 @@ const categories = {
 };
 
 export default async function CategoryPage({ params }) {
-  const category = categories[params.slug] || {
+  const { slug } = await params;
+
+  const category = categories[slug] || {
     name: "Products",
     description: "Browse our collection of products.",
     productCount: 30,
@@ -69,9 +71,10 @@ export default async function CategoryPage({ params }) {
     item.name.toLocaleLowerCase().replace(" ", "-")
   );
 
-  if (!getAllValidCategories.includes(params.slug)) {
+  if (!getAllValidCategories.includes(slug)) {
     return <Custom404 />;
   }
+
   return (
     <Suspense fallback={<CategoryLoading />}>
       <main className="container mx-auto px-4 py-8">
@@ -88,7 +91,7 @@ export default async function CategoryPage({ params }) {
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold">Filters</h2>
                 <Button variant="ghost" size="sm" className="h-8 text-sm">
-                  Clear All
+                  Inlatura filtre
                 </Button>
               </div>
               <CategoryFilters category={category} />
@@ -118,7 +121,7 @@ export default async function CategoryPage({ params }) {
                       <CategoryFilters category={category} />
                     </div>
                     <div className="flex justify-between mt-4">
-                      <Button variant="outline">Clear All</Button>
+                      <Button variant="outline">Inlatura filtre</Button>
                       <Button>Apply Filters</Button>
                     </div>
                   </SheetContent>
@@ -188,7 +191,7 @@ export default async function CategoryPage({ params }) {
             </div>
 
             {/* Product Grid */}
-            <ProductGrid slug={params.slug} />
+            <ProductGrid slug={slug} />
 
             {/* Pagination */}
             <div className="mt-12 flex justify-center">

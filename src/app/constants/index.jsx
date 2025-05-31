@@ -1,5 +1,5 @@
 export const productCategories = [
-  { name: "Home", href: "/", subcategories: [] },
+  { name: "Acasa", href: "/", subcategories: [] },
   {
     name: "Baloane",
     href: "/category/baloane",

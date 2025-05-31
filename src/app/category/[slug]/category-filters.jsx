@@ -25,7 +25,15 @@ export default function CategoryFilters({ category }) {
   // Default filters if category doesn't have specific ones
   const filters = category?.filters || {
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-    colors: ["Black", "White", "Gray", "Navy", "Green", "Red", "Brown"],
+    colors: [
+      { name: "Negru", color: "Black" },
+      { name: "Alb", color: "White" },
+      { name: "Gri", color: "Gray" },
+      { name: "Bleumarin", color: "Navy" },
+      { name: "Verde", color: "Green" },
+      { name: "Roșu", color: "Red" },
+      { name: "Maro", color: "Brown" },
+    ],
     priceRange: { min: 19.99, max: 199.99 },
   };
 
@@ -44,7 +52,7 @@ export default function CategoryFilters({ category }) {
         onOpenChange={() => toggleSection("price")}
       >
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium">Price Range</h3>
+          <h3 className="text-sm font-medium">Filtreaza dupa pret</h3>
           <CollapsibleTrigger asChild>
             <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
               <ChevronDown
@@ -98,44 +106,6 @@ export default function CategoryFilters({ category }) {
         </CollapsibleContent>
       </Collapsible>
       <Separator />
-      {/* Size Filter */}
-      {filters.sizes && (
-        <>
-          <Collapsible
-            open={openSections.size}
-            onOpenChange={() => toggleSection("size")}
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-medium">Size</h3>
-              <CollapsibleTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${
-                      openSections.size ? "rotate-180" : ""
-                    }`}
-                  />
-                </Button>
-              </CollapsibleTrigger>
-            </div>
-            <CollapsibleContent className="pt-2">
-              <div className="grid grid-cols-4 gap-2">
-                {filters.sizes.map((size) => (
-                  <Button
-                    key={size}
-                    variant="outline"
-                    className="h-9 text-xs"
-                    size="sm"
-                  >
-                    {size}
-                  </Button>
-                ))}
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
-
-          <Separator />
-        </>
-      )}
       {/* Color Filter */}
       <Collapsible
         open={openSections.color}
@@ -155,7 +125,7 @@ export default function CategoryFilters({ category }) {
         </div>
         <CollapsibleContent className="pt-2">
           <div className="grid grid-cols-6 gap-2">
-            {filters.colors.map((color) => (
+            {filters.colors.map(({ name, color }) => (
               <button
                 key={color}
                 className="flex flex-col items-center gap-1"
@@ -165,92 +135,13 @@ export default function CategoryFilters({ category }) {
                   className="h-6 w-6 rounded-full border border-gray-200"
                   style={{ backgroundColor: color.toLowerCase() }}
                 ></span>
-                <span className="text-xs">{color}</span>
+                <span className="text-xs">{name}</span>
               </button>
             ))}
           </div>
         </CollapsibleContent>
       </Collapsible>
       <Separator />
-      {/* Brand Filter */}
-      <Collapsible
-        open={openSections.brand}
-        onOpenChange={() => toggleSection("brand")}
-      >
-        <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium">Brand</h3>
-          <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${
-                  openSections.brand ? "rotate-180" : ""
-                }`}
-              />
-            </Button>
-          </CollapsibleTrigger>
-        </div>
-        <CollapsibleContent className="pt-2">
-          <div className="space-y-1">
-            {["Brand A", "Brand B", "Brand C", "Brand D", "Brand E"].map(
-              (brand) => (
-                <div key={brand} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id={`brand-${brand}`}
-                    className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                  />
-                  <label htmlFor={`brand-${brand}`} className="ml-2 text-sm">
-                    {brand}
-                  </label>
-                </div>
-              )
-            )}
-          </div>
-          <Button variant="link" size="sm" className="mt-1 h-auto p-0 text-xs">
-            Show more
-          </Button>
-        </CollapsibleContent>
-      </Collapsible>
-      <Separator />
-      {/* Material Filter */}
-      <Collapsible
-        open={openSections.material}
-        onOpenChange={() => toggleSection("material")}
-      >
-        <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium">Material</h3>
-          <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${
-                  openSections.material ? "rotate-180" : ""
-                }`}
-              />
-            </Button>
-          </CollapsibleTrigger>
-        </div>
-        <CollapsibleContent className="pt-2">
-          <div className="space-y-1">
-            {["Cotton", "Linen", "Polyester", "Wool", "Silk"].map(
-              (material) => (
-                <div key={material} className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id={`material-${material}`}
-                    className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                  />
-                  <label
-                    htmlFor={`material-${material}`}
-                    className="ml-2 text-sm"
-                  >
-                    {material}
-                  </label>
-                </div>
-              )
-            )}
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
     </div>
   );
 }
